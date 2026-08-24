@@ -1,0 +1,175 @@
+# ==========================================================================
+# robominds Light Theme — Single Source of Truth
+# --------------------------------------------------------------------------
+# Every color used by the omarchy quattro, VS Code and Neovim generators is
+# defined here. Edit a value once and re-run `python -m theme.robominds_theme`
+# to regenerate all three targets.
+#
+# Color values are taken from the robominds living styleguide
+# (colors.json / themes.json "light"). Brand shades are kept verbatim; the
+# semantic mappings below choose the shade appropriate for a light UI.
+# ==========================================================================
+
+[meta]
+name        = "robominds-light"
+mode        = "light"
+description = "robominds brand colors, light variant"
+version     = "1.0.0"
+
+# --------------------------------------------------------------------------
+# Raw brand palette — the lookup table.
+# Mirrors tmp/robominds-styleguide/colors.json. Do NOT reference these
+# directly in generators; map them through the [ui]/[terminal]/[syntax]
+# sections so a re-mapping only touches one place.
+# --------------------------------------------------------------------------
+
+[brand.blue]
+900 = "#0A1946"
+800 = "#053C72"
+700 = "#0052BB"
+600 = "#0073D7"
+500 = "#2593F4"
+400 = "#64B7F7"
+300 = "#94D1F9"
+200 = "#C0E6FC"
+100 = "#DDF4FD"
+
+[brand.neutral]
+midnight    = "#262626"
+white       = "#FFFFFF"
+navy_gray_1 = "#1D2731"
+navy_gray_2 = "#0E0E13"
+
+[brand.neutral.gray]
+800 = "#3C3C3C"
+700 = "#4D4D4D"
+400 = "#BBBBBB"
+300 = "#DBDBDB"
+200 = "#E6E6E6"
+100 = "#F2F2F2"
+50  = "#F9F9F9"
+
+[brand.accent.violet]
+700 = "#3F2373"
+500 = "#6D46B8"
+300 = "#A98BE0"
+100 = "#EDE6FA"
+
+[brand.accent.green]
+700 = "#0F5C2E"
+500 = "#15803D"
+300 = "#6FC08D"
+100 = "#E9F5EE"
+
+[brand.accent.yellow]
+700 = "#9C6D00"
+500 = "#E8A100"
+300 = "#F4C64D"
+100 = "#FDF4E0"
+
+[brand.accent.orange]
+700 = "#A34F0E"
+500 = "#E4761B"
+300 = "#F0A96A"
+100 = "#FCEDE0"
+
+[brand.accent.red]
+700 = "#9C1F1F"
+500 = "#D32F2F"
+300 = "#E88585"
+100 = "#FBEAEA"
+
+[brand.accent.magenta]
+700 = "#7A2968"
+500 = "#A63A8F"
+300 = "#C97FB8"
+100 = "#F6E7F2"
+
+[brand.accent.teal]
+700 = "#0B5C5C"
+500 = "#12857F"
+300 = "#66BDB6"
+
+# --------------------------------------------------------------------------
+# Semantic UI roles — surfaces, text, borders, accents.
+# Maps the brand palette onto the omarchy quattro surface/text vocabulary.
+# --------------------------------------------------------------------------
+
+[ui]
+background         = "#FFFFFF"   # neutral.white  — main editor/canvas
+dark_background    = "#F9F9F9"   # neutral.gray.50 — sidebars, elevated
+darker_background  = "#F2F2F2"   # neutral.gray.100 — sunken / inactive
+lighter_background = "#E6E6E6"   # neutral.gray.200 — hover wash
+foreground         = "#262626"   # neutral.midnight — primary text
+dark_foreground    = "#BBBBBB"   # neutral.gray.400 — dimmed / disabled
+light_foreground   = "#4D4D4D"   # neutral.gray.700 — secondary text
+bright_foreground  = "#262626"   # neutral.midnight — emphasized text
+accent             = "#0052BB"   # brand.blue.700 — primary accent
+selection          = "#C0E6FC"   # brand.blue.200 — selection bg
+muted              = "#6B6B6B"   # mix gray.700/400 — comments, hints
+border             = "#E6E6E6"   # neutral.gray.200 — default borders
+border_strong      = "#BBBBBB"   # neutral.gray.400 — input / dividers
+
+# --------------------------------------------------------------------------
+# Terminal 16-color palette — omarchy quattro `colors.toml` keys.
+# 700 shades for the normal colors (readable on white), 500 for bright.
+# --------------------------------------------------------------------------
+
+[terminal]
+red            = "#9C1F1F"   # accent.red.700
+yellow         = "#9C6D00"   # accent.yellow.700
+orange         = "#A34F0E"   # accent.orange.700
+green          = "#0F5C2E"   # accent.green.700
+cyan           = "#0B5C5C"   # accent.teal.700
+blue           = "#0052BB"   # brand.blue.700
+magenta        = "#7A2968"   # accent.magenta.700
+brown          = "#A34F0E"   # accent.orange.700
+bright_red     = "#D32F2F"   # accent.red.500
+bright_yellow  = "#E8A100"   # accent.yellow.500
+bright_green   = "#15803D"   # accent.green.500
+bright_cyan    = "#12857F"   # accent.teal.500
+bright_blue    = "#0073D7"   # brand.blue.600
+bright_magenta = "#A63A8F"   # accent.magenta.500
+
+# --------------------------------------------------------------------------
+# Syntax highlighting roles — used by the VS Code and Neovim generators.
+# Kept intentionally close to the dark theme's mapping so the two variants
+# feel like the same theme on different backgrounds.
+# --------------------------------------------------------------------------
+
+[syntax]
+keyword          = "#7A2968"   # accent.magenta.700
+storage          = "#7A2968"   # accent.magenta.700
+function         = "#0052BB"   # brand.blue.700
+function_builtin = "#A34F0E"   # accent.orange.700
+method           = "#0052BB"   # brand.blue.700
+parameter        = "#9C6D00"   # accent.yellow.700
+property         = "#9C6D00"   # accent.yellow.700
+number           = "#7A2968"   # accent.magenta.700
+boolean          = "#A34F0E"   # accent.orange.700
+type             = "#0B5C5C"   # accent.teal.700
+class            = "#0B5C5C"   # accent.teal.700
+interface        = "#0B5C5C"   # accent.teal.700
+enum             = "#0B5C5C"   # accent.teal.700
+string           = "#0F5C2E"   # accent.green.700
+operator         = "#9C6D00"   # accent.yellow.700
+comment          = "#6B6B6B"   # ui.muted
+variable         = "#262626"   # ui.foreground
+variable_builtin = "#9C1F1F"   # accent.red.700  (this/self)
+constant_builtin = "#0073D7"   # brand.blue.600
+decorator        = "#7A2968"   # accent.magenta.700
+namespace        = "#0052BB"   # brand.blue.700
+tag              = "#9C6D00"   # accent.yellow.700
+punctuation      = "#4D4D4D"   # neutral.gray.700
+bracket          = "#4D4D4D"   # neutral.gray.700
+separator        = "#4D4D4D"   # neutral.gray.700
+
+# --------------------------------------------------------------------------
+# Status / feedback colors (diagnostics, git, etc.)
+# --------------------------------------------------------------------------
+
+[status]
+success = "#15803D"   # accent.green.500
+warning = "#E8A100"   # accent.yellow.500
+danger  = "#D32F2F"   # accent.red.500
+info    = "#0073D7"   # brand.blue.600

@@ -575,16 +575,6 @@ def generate_vscode_theme(pal: Palette) -> str:
                 "italic",
             ),
             _vscode_token(
-                "String Punctuation",
-                [
-                    "punctuation.definition.string",
-                    "punctuation.definition.string.begin",
-                    "punctuation.definition.string.end",
-                    "string.quoted punctuation.definition.string",
-                ],
-                s["string"],
-            ),
-            _vscode_token(
                 "Brackets",
                 ["punctuation.section", "meta.brace", "meta.bracket"],
                 with_alpha(s["bracket"], 0.6),
@@ -665,6 +655,16 @@ def generate_vscode_theme(pal: Palette) -> str:
             ),
             _vscode_token(
                 "Punctuation", ["punctuation"], with_alpha(s["punctuation"], 0.6)
+            ),
+            _vscode_token(
+                "String Punctuation",
+                [
+                    "punctuation.definition.string",
+                    "punctuation.definition.string.begin",
+                    "punctuation.definition.string.end",
+                    "string.quoted punctuation.definition.string",
+                ],
+                s["string"],
             ),
             _vscode_token("Markup heading", ["markup.heading"], s["keyword"]),
             _vscode_token("Markup bold", ["markup.bold"], fg, "bold"),

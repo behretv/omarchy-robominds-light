@@ -199,4 +199,5 @@ pyrightconfig.json
 tmp/               # styleguide source (not part of the installable theme)
 tmp/*
 dist/              # standalone vscode/neovim outputs (not part of the omarchy theme)
+vscode-theme.json  # generated from palette.toml; omarchy picks it up from the theme root
 !backgrounds/.gitkeep

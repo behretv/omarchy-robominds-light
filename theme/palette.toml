@@ -11,10 +11,10 @@
 # ==========================================================================
 
 [meta]
-name        = "robominds-light"
-mode        = "light"
+name = "robominds-light"
+mode = "light"
 description = "robominds brand colors, light variant"
-version     = "1.0.0"
+version = "1.0.0"
 
 # --------------------------------------------------------------------------
 # Raw brand palette — the lookup table.
@@ -35,8 +35,8 @@ version     = "1.0.0"
 100 = "#DDF4FD"
 
 [brand.neutral]
-midnight    = "#262626"
-white       = "#FFFFFF"
+midnight = "#262626"
+white = "#FFFFFF"
 navy_gray_1 = "#1D2731"
 navy_gray_2 = "#0E0E13"
 
@@ -47,7 +47,7 @@ navy_gray_2 = "#0E0E13"
 300 = "#DBDBDB"
 200 = "#E6E6E6"
 100 = "#F2F2F2"
-50  = "#F9F9F9"
+50 = "#F9F9F9"
 
 [brand.accent.violet]
 700 = "#3F2373"
@@ -96,19 +96,19 @@ navy_gray_2 = "#0E0E13"
 # --------------------------------------------------------------------------
 
 [ui]
-background         = "#FFFFFF"   # neutral.white  — main editor/canvas
-dark_background    = "#F9F9F9"   # neutral.gray.50 — sidebars, elevated
-darker_background  = "#F2F2F2"   # neutral.gray.100 — sunken / inactive
-lighter_background = "#E6E6E6"   # neutral.gray.200 — hover wash
-foreground         = "#262626"   # neutral.midnight — primary text
-dark_foreground    = "#BBBBBB"   # neutral.gray.400 — dimmed / disabled
-light_foreground   = "#4D4D4D"   # neutral.gray.700 — secondary text
-bright_foreground  = "#262626"   # neutral.midnight — emphasized text
-accent             = "#0052BB"   # brand.blue.700 — primary accent
-selection          = "#C0E6FC"   # brand.blue.200 — selection bg
-muted              = "#6B6B6B"   # mix gray.700/400 — comments, hints
-border             = "#E6E6E6"   # neutral.gray.200 — default borders
-border_strong      = "#BBBBBB"   # neutral.gray.400 — input / dividers
+background = "#FFFFFF"         # neutral.white  — main editor/canvas
+dark_background = "#F9F9F9"    # neutral.gray.50 — sidebars, elevated
+darker_background = "#F2F2F2"  # neutral.gray.100 — sunken / inactive
+lighter_background = "#E6E6E6" # neutral.gray.200 — hover wash
+foreground = "#262626"         # neutral.midnight — primary text
+dark_foreground = "#BBBBBB"    # neutral.gray.400 — dimmed / disabled
+light_foreground = "#4D4D4D"   # neutral.gray.700 — secondary text
+bright_foreground = "#262626"  # neutral.midnight — emphasized text
+accent = "#0052BB"             # brand.blue.700 — primary accent
+selection = "#C0E6FC"          # brand.blue.200 — selection bg
+muted = "#6B6B6B"              # mix gray.700/400 — comments, hints
+border = "#E6E6E6"             # neutral.gray.200 — default borders
+border_strong = "#BBBBBB"      # neutral.gray.400 — input / dividers
 
 # --------------------------------------------------------------------------
 # Terminal 16-color palette — omarchy quattro `colors.toml` keys.
@@ -116,20 +116,20 @@ border_strong      = "#BBBBBB"   # neutral.gray.400 — input / dividers
 # --------------------------------------------------------------------------
 
 [terminal]
-red            = "#9C1F1F"   # accent.red.700
-yellow         = "#9C6D00"   # accent.yellow.700
-orange         = "#A34F0E"   # accent.orange.700
-green          = "#0F5C2E"   # accent.green.700
-cyan           = "#0B5C5C"   # accent.teal.700
-blue           = "#0052BB"   # brand.blue.700
-magenta        = "#7A2968"   # accent.magenta.700
-brown          = "#A34F0E"   # accent.orange.700
-bright_red     = "#D32F2F"   # accent.red.500
-bright_yellow  = "#E8A100"   # accent.yellow.500
-bright_green   = "#15803D"   # accent.green.500
-bright_cyan    = "#12857F"   # accent.teal.500
-bright_blue    = "#0073D7"   # brand.blue.600
-bright_magenta = "#A63A8F"   # accent.magenta.500
+red = "#9C1F1F"            # accent.red.700
+yellow = "#9C6D00"         # accent.yellow.700
+orange = "#A34F0E"         # accent.orange.700
+green = "#0F5C2E"          # accent.green.700
+cyan = "#0B5C5C"           # accent.teal.700
+blue = "#0052BB"           # brand.blue.700
+magenta = "#7A2968"        # accent.magenta.700
+brown = "#A34F0E"          # accent.orange.700
+bright_red = "#D32F2F"     # accent.red.500
+bright_yellow = "#E8A100"  # accent.yellow.500
+bright_green = "#15803D"   # accent.green.500
+bright_cyan = "#12857F"    # accent.teal.500
+bright_blue = "#0073D7"    # brand.blue.600
+bright_magenta = "#A63A8F" # accent.magenta.500
 
 # --------------------------------------------------------------------------
 # Syntax highlighting roles — used by the VS Code and Neovim generators.
@@ -138,38 +138,38 @@ bright_magenta = "#A63A8F"   # accent.magenta.500
 # --------------------------------------------------------------------------
 
 [syntax]
-keyword          = "#7A2968"   # accent.magenta.700
-storage          = "#7A2968"   # accent.magenta.700
-function         = "#0052BB"   # brand.blue.700
-function_builtin = "#A34F0E"   # accent.orange.700
-method           = "#0052BB"   # brand.blue.700
-parameter        = "#9C6D00"   # accent.yellow.700
-property         = "#9C6D00"   # accent.yellow.700
-number           = "#7A2968"   # accent.magenta.700
-boolean          = "#A34F0E"   # accent.orange.700
-type             = "#0B5C5C"   # accent.teal.700
-class            = "#0B5C5C"   # accent.teal.700
-interface        = "#0B5C5C"   # accent.teal.700
-enum             = "#0B5C5C"   # accent.teal.700
-string           = "#0F5C2E"   # accent.green.700
-operator         = "#9C6D00"   # accent.yellow.700
-comment          = "#6B6B6B"   # ui.muted
-variable         = "#262626"   # ui.foreground
-variable_builtin = "#9C1F1F"   # accent.red.700  (this/self)
-constant_builtin = "#0073D7"   # brand.blue.600
-decorator        = "#7A2968"   # accent.magenta.700
-namespace        = "#0052BB"   # brand.blue.700
-tag              = "#9C6D00"   # accent.yellow.700
-punctuation      = "#4D4D4D"   # neutral.gray.700
-bracket          = "#4D4D4D"   # neutral.gray.700
-separator        = "#4D4D4D"   # neutral.gray.700
+keyword = "#7A2968"          # accent.magenta.700
+storage = "#7A2968"          # accent.magenta.700
+function = "#0052BB"         # brand.blue.700
+function_builtin = "#A34F0E" # accent.orange.700
+method = "#0052BB"           # brand.blue.700
+parameter = "#9C6D00"        # accent.yellow.700
+property = "#9C6D00"         # accent.yellow.700
+number = "#7A2968"           # accent.magenta.700
+boolean = "#A34F0E"          # accent.orange.700
+type = "#15803D"             # accent.green.500 — brighter green, distinct from strings
+class = "#15803D"            # accent.green.500
+interface = "#15803D"        # accent.green.500
+enum = "#15803D"             # accent.green.500
+string = "#0F5C2E"           # accent.green.700
+operator = "#9C6D00"         # accent.yellow.700
+comment = "#6B6B6B"          # ui.muted
+variable = "#262626"         # ui.foreground
+variable_builtin = "#9C1F1F" # accent.red.700  (this/self)
+constant_builtin = "#0073D7" # brand.blue.600
+decorator = "#7A2968"        # accent.magenta.700
+namespace = "#0052BB"        # brand.blue.700
+tag = "#9C6D00"              # accent.yellow.700
+punctuation = "#4D4D4D"      # neutral.gray.700
+bracket = "#4D4D4D"          # neutral.gray.700
+separator = "#4D4D4D"        # neutral.gray.700
 
 # --------------------------------------------------------------------------
 # Status / feedback colors (diagnostics, git, etc.)
 # --------------------------------------------------------------------------
 
 [status]
-success = "#15803D"   # accent.green.500
-warning = "#E8A100"   # accent.yellow.500
-danger  = "#D32F2F"   # accent.red.500
-info    = "#0073D7"   # brand.blue.600
+success = "#15803D" # accent.green.500
+warning = "#E8A100" # accent.yellow.500
+danger = "#D32F2F"  # accent.red.500
+info = "#0073D7"    # brand.blue.600

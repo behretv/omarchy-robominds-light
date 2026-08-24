@@ -196,8 +196,8 @@ pyrightconfig.json
 
 
 # robominds-light theme
-tmp/               # styleguide source (not part of the installable theme)
+tmp/
 tmp/*
-dist/              # standalone vscode/neovim outputs (not part of the omarchy theme)
-vscode-theme.json  # generated from palette.toml; omarchy picks it up from the theme root
+dist/
+vscode-theme.json
 !backgrounds/.gitkeep

@@ -587,7 +587,16 @@ def generate_vscode_theme(pal: Palette) -> str:
             _vscode_token("Accessor", ["punctuation.accessor"], s["operator"]),
             _vscode_token(
                 "Strings",
-                ["string", "string.quoted", "string.unquoted", "string.template"],
+                [
+                    "string",
+                    "string.quoted",
+                    "string.quoted.triple",
+                    "string.quoted.triple.single",
+                    "string.quoted.triple.double",
+                    "string.quoted.docstring",
+                    "string.unquoted",
+                    "string.template",
+                ],
                 s["string"],
             ),
             _vscode_token("Numbers", ["constant.numeric"], s["number"]),
@@ -654,17 +663,20 @@ def generate_vscode_theme(pal: Palette) -> str:
                 "Tag attributes", ["entity.other.attribute-name"], s["property"]
             ),
             _vscode_token(
-                "Punctuation", ["punctuation"], with_alpha(s["punctuation"], 0.6)
-            ),
-            _vscode_token(
                 "String Punctuation",
                 [
                     "punctuation.definition.string",
                     "punctuation.definition.string.begin",
                     "punctuation.definition.string.end",
+                    "punctuation.definition.string.triple",
+                    "punctuation.definition.string.triple.begin",
+                    "punctuation.definition.string.triple.end",
                     "string.quoted punctuation.definition.string",
                 ],
                 s["string"],
+            ),
+            _vscode_token(
+                "Punctuation", ["punctuation"], with_alpha(s["punctuation"], 0.6)
             ),
             _vscode_token("Markup heading", ["markup.heading"], s["keyword"]),
             _vscode_token("Markup bold", ["markup.bold"], fg, "bold"),
@@ -860,6 +872,8 @@ def generate_neovim_colorscheme(pal: Palette) -> str:
         ("@module", s["namespace"], None),
         ("@string", s["string"], None),
         ("@string.special", s["string"], None),
+        ("@string.documentation", s["string"], None),
+        ("@string.multiline", s["string"], None),
         ("@character", s["string"], None),
         ("@number", s["number"], None),
         ("@boolean", s["boolean"], None),
@@ -1086,13 +1100,22 @@ def main(argv: list[str] | None = None) -> int:
     pal = Palette.load(args.palette)
     print(f"Loaded palette: {pal.name} ({pal.mode}) from {args.palette}")
 
-    # omarchy colors.toml goes to repo root; standalone targets go to dist/
+    # omarchy colors.toml + vscode-theme.json go to repo root (the theme
+    # directory); standalone targets go to dist/ for distribution.
     if args.target in ("all", "omarchy"):
         out_omarchy = args.out_dir or HERE.parent
         _write(
             generate_omarchy_colors_toml(pal),
             out_omarchy / "colors.toml",
             "omarchy quattro",
+        )
+        # Write vscode-theme.json to the theme root so omarchy uses our
+        # custom theme (with correct string-punctuation coloring) instead
+        # of the generic template-generated one.
+        _write(
+            generate_vscode_theme(pal),
+            out_omarchy / "vscode-theme.json",
+            "VS Code (omarchy)",
         )
     if args.target in ("all", "vscode"):
         out_standalone = args.out_dir or Path("dist")

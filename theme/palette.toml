@@ -133,19 +133,18 @@ bright_magenta = "#A63A8F" # accent.magenta.500
 
 # --------------------------------------------------------------------------
 # Syntax highlighting roles — used by the VS Code and Neovim generators.
-# Kept intentionally close to the dark theme's mapping so the two variants
-# feel like the same theme on different backgrounds.
+# Each role maps to a brand accent shade chosen for readability on white.
 # --------------------------------------------------------------------------
 
 [syntax]
 keyword = "#7A2968"          # accent.magenta.700
-storage = "#7A2968"          # accent.magenta.700
+storage = "#7A2968"          # accent.magenta.700  (storage modifiers are keyword-like)
 function = "#0052BB"         # brand.blue.700
 function_builtin = "#A34F0E" # accent.orange.700
 method = "#0052BB"           # brand.blue.700
 parameter = "#9C6D00"        # accent.yellow.700
 property = "#9C6D00"         # accent.yellow.700
-number = "#7A2968"           # accent.magenta.700
+number = "#6D46B8"           # accent.violet.500 — distinct from keyword (was magenta.700)
 boolean = "#A34F0E"          # accent.orange.700
 type = "#15803D"             # accent.green.500 — brighter green, distinct from strings
 class = "#15803D"            # accent.green.500
@@ -157,7 +156,7 @@ comment = "#6B6B6B"          # ui.muted
 variable = "#262626"         # ui.foreground
 variable_builtin = "#9C1F1F" # accent.red.700  (this/self)
 constant_builtin = "#0073D7" # brand.blue.600
-decorator = "#7A2968"        # accent.magenta.700
+decorator = "#3F2373"        # accent.violet.700 — distinct from keyword (was magenta.700)
 namespace = "#0052BB"        # brand.blue.700
 tag = "#9C6D00"              # accent.yellow.700
 punctuation = "#4D4D4D"      # neutral.gray.700

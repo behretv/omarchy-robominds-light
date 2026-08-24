@@ -1042,6 +1042,256 @@ def generate_neovim_colorscheme(pal: Palette) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Generator: Neovim aether plugin spec (neovim.lua for omarchy)
+# ---------------------------------------------------------------------------
+
+
+def generate_neovim_aether(pal: Palette) -> str:
+    """Render the neovim.lua plugin spec for aether.nvim.
+
+    This file replaces omarchy's template-generated one. It maps ALL aether
+    internal color names from our palette and overrides highlight groups to
+    match the VS Code theme exactly.
+    """
+    ui = pal.ui_colors
+    s = pal.syntax_colors
+    st = pal.status_colors
+    term = pal.terminal_colors
+
+    def q(v: str) -> str:
+        return f'"{v}"'
+
+    # Aether internal color names → our palette.
+    # Many of these are not in the omarchy template and would otherwise keep
+    # aether's dark-theme defaults (neon green, light cyan, etc.).
+    colors = {
+        # backgrounds
+        "bg": ui["background"],
+        "bg_dark": ui["dark_background"],
+        "bg_dark1": ui["dark_background"],
+        "bg_highlight": ui["darker_background"],
+        # foregrounds
+        "fg": ui["foreground"],
+        "fg_dark": ui["dark_foreground"],
+        "fg_gutter": ui["dark_foreground"],
+        "muted": ui["muted"],
+        "comment": ui["muted"],
+        "dark3": ui["muted"],
+        "dark5": ui["dark_foreground"],
+        # brand colors (terminal 16-color palette)
+        "green": term["green"],
+        "green1": term["bright_green"],
+        "green2": term["bright_green"],
+        "yellow": term["yellow"],
+        "orange": term["orange"],
+        "red": term["red"],
+        "red1": term["bright_red"],
+        "blue": term["blue"],
+        "blue0": term["blue"],
+        "blue1": term["bright_blue"],
+        "blue2": term["bright_blue"],
+        "blue5": s["operator"],
+        "blue6": term["bright_cyan"],
+        "blue7": ui["darker_background"],
+        "magenta": term["magenta"],
+        "magenta2": term["magenta"],
+        "purple": term["magenta"],
+        "teal": term["cyan"],
+        "cyan": term["cyan"],
+        "terminal_black": ui["darker_background"],
+        # aliases
+        "accent": ui["accent"],
+        "cursor": ui["bright_foreground"],
+        "foreground": ui["foreground"],
+        "background": ui["background"],
+        "selection": ui["selection"],
+        "selection_foreground": ui["foreground"],
+        "selection_background": ui["selection"],
+    }
+
+    colors_lua = ",\n        ".join(f"{k} = {q(v)}" for k, v in colors.items())
+
+    # Highlight overrides applied after aether loads.
+    # Each entry: group → {fg=..., bg=..., style=...}
+    # These match our VS Code tokenColors exactly.
+    overrides: list[tuple[str, dict[str, str | None]]] = [
+        # --- treesitter: strings ---
+        ("@string", {"fg": s["string"]}),
+        ("@string.special", {"fg": s["string"]}),
+        ("@string.documentation", {"fg": s["string"]}),
+        ("@string.multiline", {"fg": s["string"]}),
+        ("@string.escape", {"fg": s["decorator"]}),
+        ("@character", {"fg": s["string"]}),
+        ("@character.special", {"fg": s["string"]}),
+        # --- treesitter: constants ---
+        ("@number", {"fg": s["number"]}),
+        ("@number.float", {"fg": s["number"]}),
+        ("@boolean", {"fg": s["boolean"]}),
+        ("@constant", {"fg": s["property"]}),
+        ("@constant.builtin", {"fg": s["constant_builtin"]}),
+        ("@constant.macro", {"fg": s["decorator"]}),
+        # --- treesitter: types ---
+        ("@type", {"fg": s["type"]}),
+        ("@type.builtin", {"fg": s["type"]}),
+        ("@type.definition", {"fg": s["type"]}),
+        ("@type.qualifier", {"fg": s["storage"]}),
+        ("@constructor", {"fg": s["type"]}),
+        # --- treesitter: functions ---
+        ("@function", {"fg": s["function"]}),
+        ("@function.builtin", {"fg": s["function_builtin"]}),
+        ("@function.call", {"fg": s["function"]}),
+        ("@function.macro", {"fg": s["function_builtin"]}),
+        ("@function.method", {"fg": s["method"]}),
+        ("@function.method.call", {"fg": s["method"]}),
+        # --- treesitter: keywords ---
+        ("@keyword", {"fg": s["keyword"]}),
+        ("@keyword.conditional", {"fg": s["keyword"]}),
+        ("@keyword.repeat", {"fg": s["keyword"]}),
+        ("@keyword.return", {"fg": s["keyword"]}),
+        ("@keyword.function", {"fg": s["keyword"]}),
+        ("@keyword.import", {"fg": s["function_builtin"]}),
+        ("@keyword.storage", {"fg": s["storage"]}),
+        ("@keyword.exception", {"fg": s["keyword"]}),
+        ("@keyword.operator", {"fg": s["operator"]}),
+        # --- treesitter: variables / properties ---
+        ("@variable", {"fg": s["variable"]}),
+        ("@variable.builtin", {"fg": s["variable_builtin"], "style": "italic"}),
+        ("@variable.parameter", {"fg": s["parameter"]}),
+        ("@variable.member", {"fg": s["property"]}),
+        ("@property", {"fg": s["property"]}),
+        # --- treesitter: modules / namespaces ---
+        ("@module", {"fg": s["namespace"]}),
+        ("@module.builtin", {"fg": s["variable_builtin"]}),
+        # --- treesitter: operators / punctuation ---
+        ("@operator", {"fg": s["operator"]}),
+        ("@punctuation.delimiter", {"fg": s["separator"]}),
+        ("@punctuation.bracket", {"fg": s["bracket"]}),
+        ("@punctuation.special", {"fg": s["operator"]}),
+        # --- treesitter: comments ---
+        ("@comment", {"fg": s["comment"], "style": "italic"}),
+        # --- treesitter: tags / markup ---
+        ("@tag", {"fg": s["tag"]}),
+        ("@tag.attribute", {"fg": s["property"]}),
+        ("@tag.delimiter", {"fg": s["operator"]}),
+        ("@markup.heading", {"fg": s["keyword"], "style": "bold"}),
+        ("@markup.italic", {"fg": ui["foreground"], "style": "italic"}),
+        ("@markup.bold", {"fg": ui["foreground"], "style": "bold"}),
+        ("@markup.strikethrough", {"fg": ui["foreground"], "style": "strikethrough"}),
+        ("@markup.link", {"fg": ui["accent"], "style": "underline"}),
+        ("@markup.link.label", {"fg": s["function"]}),
+        ("@markup.link.url", {"fg": ui["accent"], "style": "underline"}),
+        ("@markup.raw", {"fg": s["function"]}),
+        ("@markup.list", {"fg": s["operator"]}),
+        ("@label", {"fg": s["keyword"]}),
+        # --- treesitter: diff ---
+        ("@diff.plus", {"fg": st["success"]}),
+        ("@diff.minus", {"fg": st["danger"]}),
+        ("@diff.delta", {"fg": st["info"]}),
+        # --- LSP semantic tokens ---
+        ("@lsp.type.keyword", {"fg": s["keyword"]}),
+        ("@lsp.type.variable", {"fg": s["variable"]}),
+        ("@lsp.type.function", {"fg": s["function"]}),
+        ("@lsp.type.method", {"fg": s["method"]}),
+        ("@lsp.type.parameter", {"fg": s["parameter"]}),
+        ("@lsp.type.property", {"fg": s["property"]}),
+        ("@lsp.type.type", {"fg": s["type"]}),
+        ("@lsp.type.class", {"fg": s["class"]}),
+        ("@lsp.type.interface", {"fg": s["interface"]}),
+        ("@lsp.type.enum", {"fg": s["enum"]}),
+        ("@lsp.type.enumMember", {"fg": s["property"]}),
+        ("@lsp.type.macro", {"fg": s["function_builtin"]}),
+        ("@lsp.type.decorator", {"fg": s["decorator"]}),
+        ("@lsp.type.namespace", {"fg": s["namespace"]}),
+        ("@lsp.type.number", {"fg": s["number"]}),
+        ("@lsp.type.string", {"fg": s["string"]}),
+        ("@lsp.type.comment", {"fg": s["comment"]}),
+        ("@lsp.type.operator", {"fg": s["operator"]}),
+        ("@lsp.mod.deprecated", {"style": "strikethrough"}),
+        # --- legacy vim syntax groups ---
+        ("Comment", {"fg": s["comment"], "style": "italic"}),
+        ("Constant", {"fg": s["number"]}),
+        ("String", {"fg": s["string"]}),
+        ("Character", {"fg": s["string"]}),
+        ("Number", {"fg": s["number"]}),
+        ("Boolean", {"fg": s["boolean"]}),
+        ("Float", {"fg": s["number"]}),
+        ("Identifier", {"fg": s["variable"]}),
+        ("Function", {"fg": s["function"]}),
+        ("Statement", {"fg": s["keyword"]}),
+        ("Conditional", {"fg": s["keyword"]}),
+        ("Repeat", {"fg": s["keyword"]}),
+        ("Label", {"fg": s["keyword"]}),
+        ("Operator", {"fg": s["operator"]}),
+        ("Keyword", {"fg": s["keyword"]}),
+        ("Exception", {"fg": s["keyword"]}),
+        ("PreProc", {"fg": s["decorator"]}),
+        ("Include", {"fg": s["function_builtin"]}),
+        ("Define", {"fg": s["decorator"]}),
+        ("Macro", {"fg": s["function_builtin"]}),
+        ("PreCondit", {"fg": s["decorator"]}),
+        ("Type", {"fg": s["type"]}),
+        ("StorageClass", {"fg": s["storage"]}),
+        ("Structure", {"fg": s["type"]}),
+        ("Typedef", {"fg": s["type"]}),
+        ("Special", {"fg": s["function"]}),
+        ("SpecialChar", {"fg": s["string"]}),
+        ("Tag", {"fg": s["tag"]}),
+        ("Delimiter", {"fg": s["separator"]}),
+        ("SpecialComment", {"fg": s["comment"], "style": "italic"}),
+        ("Debug", {"fg": s["function_builtin"]}),
+    ]
+
+    # Build the override Lua lines
+    override_lines: list[str] = []
+    for group, spec in overrides:
+        parts: list[str] = []
+        if spec.get("fg"):
+            parts.append(f"fg = {q(spec['fg'])}")  # type: ignore[arg-type]
+        if spec.get("bg"):
+            parts.append(f"bg = {q(spec['bg'])}")  # type: ignore[arg-type]
+        style = spec.get("style")
+        if style:
+            for attr in style.replace(" ", "").split(","):
+                if attr and attr != "none":
+                    parts.append(f"{attr} = true")
+        if not parts:
+            parts.append("fg = 'NONE'")
+        override_lines.append(
+            f"  vim.api.nvim_set_hl(0, {q(group)}, {{{', '.join(parts)}}})"
+        )
+
+    overrides_lua = "\n".join(override_lines)
+
+    return f"""-- {pal.name}: generated from theme/palette.toml.
+-- Do not edit by hand; re-run `python -m theme.robominds_theme omarchy`.
+return {{
+  {{
+    "bjarneo/aether.nvim",
+    branch = "v3",
+    name = "aether",
+    priority = 1000,
+    opts = {{
+      colors = {{
+        {colors_lua},
+      }},
+    }},
+    config = function(_, opts)
+      require("aether").setup(opts)
+      -- Override highlight groups to match the VS Code theme exactly.
+{overrides_lua}
+    end,
+  }},
+  {{
+    "LazyVim/LazyVim",
+    opts = {{
+      colorscheme = "aether",
+    }},
+  }},
+}}
+"""
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 
@@ -1100,8 +1350,8 @@ def main(argv: list[str] | None = None) -> int:
     pal = Palette.load(args.palette)
     print(f"Loaded palette: {pal.name} ({pal.mode}) from {args.palette}")
 
-    # omarchy colors.toml + vscode-theme.json go to repo root (the theme
-    # directory); standalone targets go to dist/ for distribution.
+    # omarchy colors.toml + vscode-theme.json + neovim.lua go to repo root
+    # (the theme directory); standalone targets go to dist/ for distribution.
     if args.target in ("all", "omarchy"):
         out_omarchy = args.out_dir or HERE.parent
         _write(
@@ -1116,6 +1366,14 @@ def main(argv: list[str] | None = None) -> int:
             generate_vscode_theme(pal),
             out_omarchy / "vscode-theme.json",
             "VS Code (omarchy)",
+        )
+        # Write neovim.lua to the theme root so omarchy uses our custom
+        # aether config (with all internal colors mapped + highlight
+        # overrides matching VS Code) instead of the generic template.
+        _write(
+            generate_neovim_aether(pal),
+            out_omarchy / "neovim.lua",
+            "Neovim (omarchy)",
         )
     if args.target in ("all", "vscode"):
         out_standalone = args.out_dir or Path("dist")

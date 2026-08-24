@@ -195,4 +195,7 @@ pyrightconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode
 
 
-tmp/
+# robominds-light theme
+tmp/               # styleguide source (not part of the installable theme)
+dist/              # standalone vscode/neovim outputs (not part of the omarchy theme)
+!backgrounds/.gitkeep

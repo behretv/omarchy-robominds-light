@@ -41,23 +41,18 @@ omarchy-robominds-light/
 ├── .gitignore
 └── theme/                 ← build tooling (not part of the installed theme)
     ├── palette.toml       ← single source of truth: all colors + semantic roles
-    ├── robominds_theme.py ← enums, loader, generators (omarchy/vscode/neovim)
+    ├── robominds_theme.py ← enums, loader, generator (colors.toml)
     └── README.md          ← build tool docs
 ```
 
 ## Regenerating `colors.toml`
 
 ```bash
-# default: writes colors.toml to repo root
+# writes colors.toml to repo root
 python -m theme.robominds_theme
 
-# also generate standalone VS Code + Neovim themes into dist/
-python -m theme.robominds_theme all
-
-# one target at a time
-python -m theme.robominds_theme omarchy   # → ./colors.toml
-python -m theme.robominds_theme vscode    # → ./dist/vscode/
-python -m theme.robominds_theme neovim    # → ./dist/neovim/
+# or to a custom output directory
+python -m theme.robominds_theme --out-dir dist
 ```
 
 Requires Python 3.11+ (uses stdlib `tomllib`).

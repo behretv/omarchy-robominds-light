@@ -199,6 +199,5 @@ pyrightconfig.json
 tmp/
 tmp/*
 dist/
-vscode-theme.json
 neovim.lua
 !backgrounds/.gitkeep

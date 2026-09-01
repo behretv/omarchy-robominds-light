@@ -1,4 +1,4 @@
-"""robominds light theme — single source of truth + generators."""
+"""robominds light theme — single source of truth + generator."""
 
 from .robominds_theme import (
     Accent,
@@ -11,10 +11,7 @@ from .robominds_theme import (
     TerminalColor,
     TealAccent,
     UIRole,
-    generate_all,
-    generate_neovim_colorscheme,
     generate_omarchy_colors_toml,
-    generate_vscode_theme,
 )
 
 __all__ = [
@@ -28,8 +25,5 @@ __all__ = [
     "TerminalColor",
     "TealAccent",
     "UIRole",
-    "generate_all",
-    "generate_neovim_colorscheme",
     "generate_omarchy_colors_toml",
-    "generate_vscode_theme",
 ]
